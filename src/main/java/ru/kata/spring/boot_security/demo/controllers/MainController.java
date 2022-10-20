@@ -40,7 +40,9 @@ public class MainController {
 
     @GetMapping("/admin")
     public String showAdminPage() {
+//        return "adminPage";
 
-        return "adminPage";
+        return "letters";
+
     }
 }
