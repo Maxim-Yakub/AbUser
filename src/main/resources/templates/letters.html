@@ -217,15 +217,18 @@
                                             </div>
                                             <div class="col-4 mt-4 mb-4 offset-md-4">
                                                 <!--                                                    <label for="letterFile"><b>Файл</b></label>-->
-                                                <input type="file" class="form-control-file" id="letterFile"
-                                                       required>
+<!--                                                <input type="file" class="form-control-file" id="letterFile" required>-->
+                                                <input id="singleFileUploadInput" type="file" name="file" class="file-input" required />
                                             </div>
                                             <!--                                            </div>-->
+                                            <div class="col-4 mt-4 mb-4 offset-md-4 upload-response">
+                                                <div id="singleFileUploadError"></div>
+                                                <div id="singleFileUploadSuccess"></div>
+                                            </div>
                                             <div class="mt-4 mb-4">
                                                 <button onclick="addUser()" href="#usersTable"
                                                         class="btn btn-success">
-                                                    Add new
-                                                    user
+                                                    Добавить письмо
                                                 </button>
                                             </div>
                                         </div>
