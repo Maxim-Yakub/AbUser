@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ab User</title>
+
+    <link rel="stylesheet" type="text/css" href="/styles/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/css/sidebar.css"/>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+
+</head>
+
+<body>
+
+<!--ШАПКА начало-->
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand nav-link dropdown-toggle offset-md-1 " href="#" id="navbarDropdown" role="button"
+       data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        АБ-73
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">АБ-73</a>
+        <a class="dropdown-item" th:href="@{users/ab73/edit}">user</a>
+        <!--        <a class="dropdown-item" href="@{users/{id}/edit(id=${user.getId()})}">user</a>-->
+
+        <a class="dropdown-item" href="#">АБ-73-01</a>
+        <a class="dropdown-item" href="#">АБ-79</a>
+        <a class="dropdown-item" href="#">АБ-81</a>
+    </div>
+
+
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Поиск">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+    </form>
+
+    <ul class="navbar-nav px-3">
+        <label> </label>
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="/logout">Выйти</a>
+        </li>
+    </ul>
+</header>
+
+<!--ШАПКА конец-->
+<div class="container-fluid bg-light ">
+    <div class="row min-vh-100">
+
+        <!--БОКОВАЯ ПАНЕЛЬ начало-->
+        <nav id="sidebarMenu" class="col-md-2 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky pt-3 offset-md-1">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" id="adminTab" href="#adminPanel">Письма</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#userPanel">Служебки</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#userPanel">Решения</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#userPanel">Протоколы совещаний</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#userPanel">Программы и методики</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#userPanel">Отказы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#adminPanel">Изделия АБ-79</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--БОКОВАЯ ПАНЕЛЬ конец-->
+
+        <!--ОСНОВНАЯ ПАНЕЛЬ начало-->
+        <div class="col-10 right">
+            <div class="tab-content">
+
+                <!--ПАНЕЛЬ ПИСЕМ-->
+                <div class="container-fluid pt-5 mt-4 tab-pane show active" id="adminPanel">
+                    <h2>Переписка по изделию в рамках кооперации</h2>
+
+                    <!--НАВИГАЦИЯ ПО ПИСЬМАМ начало-->
+                    <div class="nav nav-tabs">
+                        <a class="nav-item nav-link active" id="navAllLetters" role="tab" data-toggle="tab"
+                           href="#allLetters"> <img src="/images/all.svg"> Все </a>
+
+                        <a class="nav-item nav-link" id="navInLetters" role="tab" data-toggle="tab"
+                           href="#usersTable"> <img src="/images/incomming.svg"> Входящие </a>
+
+                        <a class="nav-item nav-link" id="navOutLetters" role="tab" data-toggle="tab"
+                           href="#usersTable"> <img src="/images/outcomming.svg"> Исходяшие </a>
+
+                        <a class="nav-item nav-link" data-toggle="tab" href="#addUser"
+                           onclick="showNewModal()"><img src="/images/add.svg"> Добавить </a>
+                    </div>
+                    <!--НАВИГАЦИЯ ПО ПИСЬМАМ конец-->
+
+                    <!-- Панели от навигации -->
+                    <div class="tab-content">
+                        <!--1. Таблица всех пользователей начало-->
+                        <div class="tab-pane fade show active border" id="usersTable">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Все письма</h4>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th>№ п/п</th>
+                                            <th>Тип</th>
+                                            <th>№</th>
+                                            <th>Дата</th>
+                                            <th>Отправитель</th>
+                                            <th>Получатель</th>
+                                            <th>Примечание</th>
+                                            <th>Редактировать</th>
+                                            <th>Смотреть</th>
+                                            <th>Скачать</th>
+                                            <th>Удалить</th>
+                                        </tr>
+                                        </thead>
+                                        <!--JS tableInfo-->
+                                        <tbody id="tableBodyInfo"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ДОБАВЛЕНИЕ ПИСЬМА начало -->
+                        <div class="tab-pane fade" id="addUser">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Добавить новую запись по изделию АБ-79</h4>
+                                </div>
+                                <div class="col-md bg-white border">
+                                    <form id="newProductForm" align="center" class="mt-4 mb-4">
+                                        <div class="container">
+                                            <div class="row mt-4 mb-4">
+
+                                                <div class="col-2">
+                                                    <label for="productNumber"><b>Номер изделия</b></label>
+                                                    <input class="form-control" id="productNumber" type="text"
+                                                           required/>
+                                                </div>
+
+                                                <div class="col-2">
+                                                    <label for="productSeria"><b> Литера </b></label>
+                                                    <select class="custom-select" id="productSeria" required>
+                                                        <option selected>Рабочая документация</option>
+
+                                                        <option value="1"> О</option>
+                                                        <option value="2"> О (установочная серия)</option>
+                                                        <option value="3"> О1</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-2">
+                                                    <label for="productSeria"><b> Тип </b></label>
+                                                    <select class="custom-select" id="productSeria" required>
+                                                        <option selected>Тип изделия</option>
+
+                                                        <option value="1"> Серийное</option>
+                                                        <option value="2"> ОКР</option>
+                                                        <option value="3"> Технологическое</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-2">
+                                                    <label for="productNumber"><b>Номер договора</b></label>
+                                                    <input class="form-control" id="productNumber" type="text"
+                                                           required/>
+                                                </div>
+                                                <div class="col-2">
+                                                    <label for="productNumber"><b>Заказ</b></label>
+                                                    <input class="form-control" id="productNumber" type="text"
+                                                           required/>
+                                                </div>
+                                                <div class="col-2">
+                                                    <label for="productNumber"><b>Этап</b></label>
+                                                    <input class="form-control" id="productNumber" type="text"
+                                                           required/>
+                                                </div>
+
+                                                <!--                        <div class="col-md-2">-->
+                                                <!--                          <label for="letterDate"><b>Дата</b></label>-->
+                                                <!--                          <input class="form-control" id="letterDate" name="email" type="date"-->
+                                                <!--                                 required/>-->
+                                                <!--                        </div>-->
+                                            </div>
+
+                                            <div class="row mt-4 mb-4">
+                                                <div class="col-2">
+                                                    <label for="productSeria"><b> Местоположение </b></label>
+                                                    <select class="custom-select" id="productSeria" required>
+                                                        <option selected>Предприятие</option>
+                                                        <option value="1"> АО "ГосНИИП"</option>
+                                                        <option value="2"> АО "ГосМКБ "Вымпел"</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-4"></div>
+                                                <div class="col-3">
+                                                    <label for="letterDate"><b>Дата поставки по договору</b></label>
+                                                    <input class="form-control" id="letterDate" name="email" type="date"
+                                                           required/>
+
+                                                </div>
+                                                <div class="col-3">
+                                                    <label for="letterDate"><b>Дата поставки фактическая</b></label>
+                                                    <input class="form-control" id="letterDate" name="email" type="date"
+                                                           required/>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4 mb-4">
+                                                <div class="card col">
+                                                    <div class="card-header">
+                                                        <b>Комплектация</b>
+                                                    </div>
+                                                    <div class="card-body">
+
+                                                    </div>
+                                                </div>
+                                                <div class="card col">
+                                                    <div class="card-header">
+                                                        <b>Документация</b>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-striped table-hover table-bordered">
+                                                            <thead class="thead">
+                                                            <tr>
+                                                                <th>№</th>
+                                                                <th>Название</th>
+                                                                <th>Дата</th>
+                                                                <th>Смотреть</th>
+                                                                <th>Скачать</th>
+                                                                <th>Удалить</th>
+
+                                                            </tr>
+                                                            </thead>
+                                                            <!--JS tableInfo-->
+                                                            <tbody id="tableDoc">
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4 mb-4">
+                                                <div class="card col">
+                                                    <div class="card-header">
+                                                        <b>Технология</b>
+                                                    </div>
+                                                    <div class="card-body">
+
+                                                    </div>
+                                                </div>
+                                                <div class="card col">
+                                                    <div class="card-header">
+                                                        <b>Отказы</b>
+                                                    </div>
+                                                    <div class="card-body">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--                                            <div class="row mt-4 mb-4">-->
+                                            <div class="col-6 mt-4 mb-4 offset-md-3">
+                                                <label for="letterNote"><b>Примечание</b></label>
+                                                <input class="form-control" id="letterNote" type="text" required/>
+                                            </div>
+                                            <div class="col-4 mt-4 mb-4 offset-md-4">
+                                                <!--                                                    <label for="letterFile"><b>Файл</b></label>-->
+                                                <!--                                                <input type="file" class="form-control-file" id="letterFile" required>-->
+                                                <input id="singleFileUploadInput" type="file" name="file"
+                                                       class="file-input" required/>
+                                            </div>
+                                            <!--                                            </div>-->
+                                            <div class="col-4 mt-4 mb-4 offset-md-4 upload-response">
+                                                <div id="singleFileUploadError"></div>
+                                                <div id="singleFileUploadSuccess"></div>
+                                            </div>
+                                            <div class="mt-4 mb-4">
+                                                <button onclick="addUser()" href="#usersTable"
+                                                        class="btn btn-success">
+                                                    Добавить запись
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ДОБАВЛЕНИЕ ПИСЬМА конец -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<!--МОДАЛЬНОЕ ОКНО-->
+<div id="modalWindow"></div>
+<div class="modal fade mx-auto" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm mx-auto" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">TITLE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/fetch/navInfo.js"></script>
+<script src="js/fetch/tableInfo.js"></script>
+<script src="js/fetch/addUser.js"></script>
+<script src="js/fetch/deleteUser.js"></script>
+<script src="js/fetch/editUser.js"></script>
+<script src="js/fetch/userInfo.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+</body>
+</html>

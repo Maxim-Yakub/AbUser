@@ -42,7 +42,7 @@ public class MainController {
     public String showAdminPage() {
 //        return "adminPage";
 
-        return "letters";
+        return "product79";
 
     }
 }
