@@ -80,12 +80,12 @@
         <!--БОКОВАЯ ПАНЕЛЬ конец-->
 
         <!--ОСНОВНАЯ ПАНЕЛЬ начало-->
-        <div class="col-10 right">
+        <div class="col-md-10 col-lg-10 right">
             <div class="tab-content">
 
                 <!--ПАНЕЛЬ ПИСЕМ-->
                 <div class="container-fluid pt-5 mt-4 tab-pane show active" id="adminPanel">
-                    <h2>Переписка по изделию в рамках кооперации</h2>
+                    <h2>База данных изделий АБ-79</h2>
 
                     <!--НАВИГАЦИЯ ПО ПИСЬМАМ начало-->
                     <div class="nav nav-tabs">
@@ -116,16 +116,10 @@
                                         <thead class="thead-dark">
                                         <tr>
                                             <th>№ п/п</th>
-                                            <th>Тип</th>
-                                            <th>№</th>
-                                            <th>Дата</th>
-                                            <th>Отправитель</th>
-                                            <th>Получатель</th>
+                                            <th>№ изделия</th>
+                                            <th>Местоположение</th>
+                                            <th>Стадия готовности</th>
                                             <th>Примечание</th>
-                                            <th>Редактировать</th>
-                                            <th>Смотреть</th>
-                                            <th>Скачать</th>
-                                            <th>Удалить</th>
                                         </tr>
                                         </thead>
                                         <!--JS tableInfo-->
@@ -139,11 +133,12 @@
                         <div class="tab-pane fade" id="addUser">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Добавить новую запись по изделию АБ-79</h4>
+                                    <h4>Новое изделие АБ-79</h4>
                                 </div>
-                                <div class="col-md bg-white border">
-                                    <form id="newProductForm" align="center" class="mt-4 mb-4">
-                                        <div class="container">
+                                <div class="card-bogy">
+                                    <div class="container">
+                                        <form id="newProductForm" align="center" class="mt-4 mb-4">
+
                                             <div class="row mt-4 mb-4">
 
                                                 <div class="col-2">
@@ -175,7 +170,7 @@
                                                 </div>
 
                                                 <div class="col-2">
-                                                    <label for="productNumber"><b>Номер договора</b></label>
+                                                    <label for="productNumber"><b> Договор</b></label>
                                                     <input class="form-control" id="productNumber" type="text"
                                                            required/>
                                                 </div>
@@ -189,16 +184,10 @@
                                                     <input class="form-control" id="productNumber" type="text"
                                                            required/>
                                                 </div>
-
-                                                <!--                        <div class="col-md-2">-->
-                                                <!--                          <label for="letterDate"><b>Дата</b></label>-->
-                                                <!--                          <input class="form-control" id="letterDate" name="email" type="date"-->
-                                                <!--                                 required/>-->
-                                                <!--                        </div>-->
                                             </div>
 
-                                            <div class="row mt-4 mb-4">
-                                                <div class="col-2">
+                                            <div class="row mt-4 mb-4 g-5">
+                                                <div class="col-3">
                                                     <label for="productSeria"><b> Местоположение </b></label>
                                                     <select class="custom-select" id="productSeria" required>
                                                         <option selected>Предприятие</option>
@@ -206,97 +195,174 @@
                                                         <option value="2"> АО "ГосМКБ "Вымпел"</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-4"></div>
-                                                <div class="col-3">
-                                                    <label for="letterDate"><b>Дата поставки по договору</b></label>
+                                                <div class="col-5">
+                                                </div>
+                                                <div class="col-2">
+                                                    <label for="letterDate"><b>Поставка по договору</b></label>
                                                     <input class="form-control" id="letterDate" name="email" type="date"
                                                            required/>
 
                                                 </div>
-                                                <div class="col-3">
-                                                    <label for="letterDate"><b>Дата поставки фактическая</b></label>
+                                                <div class="col-2">
+                                                    <label for="letterDate"><b>Поставка фактическая</b></label>
                                                     <input class="form-control" id="letterDate" name="email" type="date"
                                                            required/>
 
                                                 </div>
                                             </div>
 
-                                            <div class="row mt-4 mb-4">
-                                                <div class="card col">
-                                                    <div class="card-header">
-                                                        <b>Комплектация</b>
-                                                    </div>
-                                                    <div class="card-body">
+                                            <div class="row mt-4 mb-4 g-2">
+                                                <div class="col-5">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <b>Комплектация</b>
+                                                        </div>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-hover table-bordered">
+                                                                <thead class="thead">
+                                                                <tr>
+                                                                    <th>№</th>
+                                                                    <th>Блок</th>
+                                                                    <th>КД</th>
+                                                                    <th>Номер</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <!--JS tableInfo-->
+                                                                <tbody id="tableDoc">
+                                                                <tr>
+                                                                    <td> 1</td>
+                                                                    <td> БУ-79</td>
+                                                                    <td> КЛИВ.468332.187</td>
+                                                                    <td><input class="form-control" id="letterDate"
+                                                                               name="email" type="text"
+                                                                               required/></td>
 
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> 2</td>
+                                                                    <td> БЦВУ-Заря38Н-79</td>
+                                                                    <td> КЛИВ.466221.028</td>
+                                                                    <td><input class="form-control" id="letterDate"
+                                                                               name="email" type="text"
+                                                                               required/></td>
+
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="card col">
-                                                    <div class="card-header">
-                                                        <b>Документация</b>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table class="table table-striped table-hover table-bordered">
-                                                            <thead class="thead">
-                                                            <tr>
-                                                                <th>№</th>
-                                                                <th>Название</th>
-                                                                <th>Дата</th>
-                                                                <th>Смотреть</th>
-                                                                <th>Скачать</th>
-                                                                <th>Удалить</th>
+                                                <div class="col-7">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <b>Документация</b>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <a href=""><img src="/images/add.svg"> Добавить </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-hover table-bordered">
+                                                                <thead class="thead">
+                                                                <tr>
+                                                                    <th>№</th>
+                                                                    <th>Название</th>
+                                                                    <th>Дата</th>
+                                                                    <th>Скачать</th>
+                                                                    <th>Удалить</th>
 
-                                                            </tr>
-                                                            </thead>
-                                                            <!--JS tableInfo-->
-                                                            <tbody id="tableDoc">
+                                                                </tr>
+                                                                </thead>
+                                                                <!--JS tableInfo-->
+                                                                <tbody id="tableDoc">
 
-                                                            </tbody>
-                                                        </table>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row mt-4 mb-4">
-                                                <div class="card col">
-                                                    <div class="card-header">
-                                                        <b>Технология</b>
-                                                    </div>
-                                                    <div class="card-body">
+                                            <div class="row mt-4 mb-4 g-2">
+                                                <div class="col-5">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <b>Технология</b>
+                                                        </div>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-hover table-bordered">
+                                                                <thead class="thead">
+                                                                <tr>
+                                                                    <th>№</th>
+                                                                    <th>Технологическая операция</th>
+                                                                    <th>Дата</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <!--JS tableInfo-->
+                                                                <tbody id="tableDoc">
 
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="card col">
-                                                    <div class="card-header">
-                                                        <b>Отказы</b>
-                                                    </div>
-                                                    <div class="card-body">
 
+                                                <div class="col-7">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="row">
+                                                                <div class="col-7">
+                                                                    <b>Отказы</b>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <a href=""><img src="/images/add.svg"> Добавить </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-hover table-bordered">
+                                                                <thead class="thead">
+                                                                <tr>
+                                                                    <th>№</th>
+                                                                    <th>Место</th>
+                                                                    <th>Дата</th>
+                                                                    <th>Причина</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <!--JS tableInfo-->
+                                                                <tbody id="tableDoc">
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--                                            <div class="row mt-4 mb-4">-->
                                             <div class="col-6 mt-4 mb-4 offset-md-3">
                                                 <label for="letterNote"><b>Примечание</b></label>
                                                 <input class="form-control" id="letterNote" type="text" required/>
                                             </div>
-                                            <div class="col-4 mt-4 mb-4 offset-md-4">
-                                                <!--                                                    <label for="letterFile"><b>Файл</b></label>-->
-                                                <!--                                                <input type="file" class="form-control-file" id="letterFile" required>-->
-                                                <input id="singleFileUploadInput" type="file" name="file"
-                                                       class="file-input" required/>
-                                            </div>
+
+                                            <!--                                            ДОБАВЛЕНИЕ ОБЩЕГО ФАЙЛА-->
+                                            <!--                                            <div class="col-4 mt-4 mb-4 offset-md-4">-->
+                                            <!--                                                <input id="singleFileUploadInput" type="file" name="file"-->
+                                            <!--                                                       class="file-input" required/>-->
                                             <!--                                            </div>-->
-                                            <div class="col-4 mt-4 mb-4 offset-md-4 upload-response">
-                                                <div id="singleFileUploadError"></div>
-                                                <div id="singleFileUploadSuccess"></div>
-                                            </div>
+                                            <!--                                            <div class="col-4 mt-4 mb-4 offset-md-4 upload-response">-->
+                                            <!--                                                <div id="singleFileUploadError"></div>-->
+                                            <!--                                                <div id="singleFileUploadSuccess"></div>-->
+                                            <!--                                            </div>-->
+
                                             <div class="mt-4 mb-4">
                                                 <button onclick="addUser()" href="#usersTable"
                                                         class="btn btn-success">
                                                     Добавить запись
                                                 </button>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
